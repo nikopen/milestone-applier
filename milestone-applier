@@ -15,3 +15,15 @@ if [[ -z "$GITHUB_REPOSITORY" ]]; then
 	echo "Set the GITHUB_REPOSITORY env variable."
 	exit 1
 fi
+
+URI=https://api.github.com
+API_VERSION=v3
+API_HEADER="Accept: application/vnd.github.${API_VERSION}+json"
+AUTH_HEADER="Authorization: token ${GITHUB_TOKEN}"
+MILESTONE="v1.15"
+
+main(){
+	action=$(jq --raw-output .action "$GITHUB_EVENT_PATH")
+	merged=$(jq --raw-output .pull_request.merged "$GITHUB_EVENT_PATH")
+
+	echo "DEBUG -> action: $action merged: $merged"
