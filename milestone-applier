@@ -39,3 +39,6 @@ main(){
                     -H "${API_HEADER}" \
                     "${URI}/repos/${owner}/${repo}/issues/${pr_number}" | jq .milestone.number
             )
+        if [[ "$is_milestoned" != NULL ]] ; then
+
+            echo "Applying milestone ${MILESTONE} for ${owner}/${repo}/pr/${pr_number}..."
