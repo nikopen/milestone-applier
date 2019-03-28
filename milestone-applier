@@ -42,3 +42,15 @@ main(){
         if [[ "$is_milestoned" != NULL ]] ; then
 
             echo "Applying milestone ${MILESTONE} for ${owner}/${repo}/pr/${pr_number}..."
+
+            curl --request PATCH -sSL \
+                -H "${AUTH_HEADER}" \
+                -H "${API_HEADER}" \
+                "${URI}/repos/${owner}/${repo}/issues/${pr_number}?milestone=${MILESTONE}"
+
+            echo "Milestone applied!"
+        fi
+    fi
+}
+
+main "$@"
